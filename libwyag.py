@@ -402,7 +402,7 @@ def log_graphviz(repo, sha, seen):
         return
     seen.add(sha)
 
-    commit = object_find(repo, sha)
+    commit = object_read(repo, sha)
     assert (commit.fmt==b'commit')
 
     if not b'parent' in commit.kvlm.keys():
@@ -418,5 +418,6 @@ def log_graphviz(repo, sha, seen):
         p = p.decode("ascii")
         print ("c_{0} -> c_{1};".format(sha, p))
         log_graphviz(repo, p, seen)
+
 
 
